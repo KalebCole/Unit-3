@@ -25,8 +25,8 @@ export default function BaristaForm() {
     let randomDrinkIndex = Math.floor(Math.random() * drinksJson.drinks.length);
 
     //set the values in the answer space to be the random drink
-    setDrink(drinksJson[randomDrinkIndex].name);
-    setTrueRecipe(drinksJson[randomDrinkIndex].ingredients)
+    setDrink(drinksJson.drinks[randomDrinkIndex].name);
+    setTrueRecipe(drinksJson.drinks[randomDrinkIndex].ingredients)
   }
 
   const onCheckAnswer = () => {};
@@ -46,7 +46,7 @@ return (
         <h2>Hi, I'd like to order a:</h2>
         <div className="drink-container">
             <h2 className="mini-header">{drink}</h2>
-            <button className="button new-drink" onClick={onNewDrink}>🔄</button>
+            <button type="new-drink-button" className="button new-drink" onClick={onNewDrink}>🔄</button>
         </div>
         <h3>Temperature</h3>
         <div className="answer-space">{inputs["temperature"]}</div>
