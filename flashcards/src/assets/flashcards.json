@@ -1,83 +1,86 @@
 [
-    {
-        "question": "Difference between EF database and actual database",
-        "answer": "EF database is a representation of the actual database, it is a snapshot of the actual database",
-        "difficulty": "easy"
-    },
-    {
-        "question": "How does C# used LINQ to query the database",
-        "answer": "There are two ways: LINQ query syntax and LINQ method syntax",
-        "difficulty": "easy"
-
-    },
-    {
-        "question": "What are all the components needed to connect to a database in ASP.NET Core",
-        "answer": "DBContext, Connection String, DBSet, Model",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What are the design patterns used in ASP.NET Core",
-        "answer": "Code-first, DB-first, and Model-first",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What is the difference between Code-first, DB-first, and Model-first",
-        "answer": "Code-first: Create the model first and then the database. DB-first: Create the database first and then the model. Model-first: Create the model first and then the database",
-        "difficulty": "medium"
-    },
-    {
-        "question": "What are data annotations used for in ASP.NET Core",
-        "answer": "Data annotations are used to define the schema of the database. Examples include: setting column types, set column names on display, validation, etc.",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What are routing templates used for in ASP.NET Core",
-        "answer": "Routing templates are used to define the URL structure of the application. For example, it can chage a URL from a query string to a URL that looks like a folder structure",
-        "difficulty": "medium"
-    },
-    {
-        "question": "What is Async used for in ASP.NET Core",
-        "answer": "Async is used to make the web application more responsive. Async tasks are added to another thread and the main thread can continue to process other tasks",
-        "difficulty": "medium"
-    },
-    {
-        "question": "What are ASP validation helpers used for in Razor Pages?",
-        "answer": "ASP validation helpers are used to validate user input and are tied to data annotations",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What are HTML helper tags used for in Razor Pages?",
-        "answer": "HTML helper tags are used to generate HTML tags so that the developer only has to change the model and not the HTML tags",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What is the process for migrating a database in ASP.NET Core",
-        "answer": "Add-Migration, Update-Database",
-        "difficulty": "easy"
-    },
-    {
-        "question": "List an example of APIs for auto-generated documentation in ASP.NET Core",
-        "answer": "Swagger",
-        "difficulty": "easy"
-    },
-    {
-        "question": "What is the difference between a GET and POST request",
-        "answer": "GET requests data from a specified resource using the URL to hold the parameters, POST submits data to be processed to a specified resource using forms to hold the parameters",
-        "difficulty": "medium"
-    },
-    {
-        "question": "Describe one reason why we might want to use an API",
-        "answer": "To allow other developers to use our data and functionality. It allows us to plug and play various APIs",
-        "difficulty": "easy"
-    },
-    {
-        "question": "ASP.NET Framework vs ASP.NET Core",
-        "answer": "ASP.NET Framework is Windows only, ASP.NET Core is cross-platform. ASP.NET Framework is a monolithic framework, ASP.NET Core is a modular framework. ASP.NET Framework is slower, ASP.NET Core is faster",
-        "difficulty": "medium"
-    },
-    {
-        "question": "In ASP.NET Razor Pages, what does MVVM stand for? What do each of the parts represent?",
-        "answer": "Model-View-ViewModel. Model is the data, View is the UI, ViewModel is the logic",
-        "difficulty": "hard"
-    }
+  {
+    "question": "Start",
+    "answer": "Click on the arrows below to start the flashcards"
+  },
+  {
+    "question": "Difference between EF database and actual database",
+    "answer": "EF database is a representation of the actual database, it is a snapshot of the actual database",
+    "difficulty": "easy"
+  },
+  {
+    "question": "How does C# used LINQ to query the database",
+    "answer": "There are two ways: LINQ query syntax and LINQ method syntax",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are all the components needed to connect to a database in ASP.NET Core",
+    "answer": "DBContext, Connection String, DBSet, Model",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are the design patterns used in ASP.NET Core",
+    "answer": "Code-first, DB-first, and Model-first",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the difference between Code-first, DB-first, and Model-first",
+    "answer": "Code-first: Create the model first and then the database. DB-first: Create the database first and then the model. Model-first: Create the model first and then the database",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What are data annotations used for in ASP.NET Core",
+    "answer": "Data annotations are used to define the schema of the database. Examples include: setting column types, set column names on display, validation, etc.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are routing templates used for in ASP.NET Core",
+    "answer": "Routing templates are used to define the URL structure of the application. For example, it can chage a URL from a query string to a URL that looks like a folder structure",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What is Async used for in ASP.NET Core",
+    "answer": "Async is used to make the web application more responsive. Async tasks are added to another thread and the main thread can continue to process other tasks",
+    "difficulty": "medium"
+  },
+  {
+    "question": "What are ASP validation helpers used for in Razor Pages?",
+    "answer": "ASP validation helpers are used to validate user input and are tied to data annotations",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What are HTML helper tags used for in Razor Pages?",
+    "answer": "HTML helper tags are used to generate HTML tags so that the developer only has to change the model and not the HTML tags",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the process for migrating a database in ASP.NET Core",
+    "answer": "Add-Migration, Update-Database",
+    "difficulty": "easy"
+  },
+  {
+    "question": "List an example of APIs for auto-generated documentation in ASP.NET Core",
+    "answer": "Swagger",
+    "difficulty": "easy"
+  },
+  {
+    "question": "What is the difference between a GET and POST request",
+    "answer": "GET requests data from a specified resource using the URL to hold the parameters, POST submits data to be processed to a specified resource using forms to hold the parameters",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Describe one reason why we might want to use an API",
+    "answer": "To allow other developers to use our data and functionality. It allows us to plug and play various APIs",
+    "difficulty": "easy"
+  },
+  {
+    "question": "ASP.NET Framework vs ASP.NET Core",
+    "answer": "ASP.NET Framework is Windows only, ASP.NET Core is cross-platform. ASP.NET Framework is a monolithic framework, ASP.NET Core is a modular framework. ASP.NET Framework is slower, ASP.NET Core is faster",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In ASP.NET Razor Pages, what does MVVM stand for? What do each of the parts represent?",
+    "answer": "Model-View-ViewModel. Model is the data, View is the UI, ViewModel is the logic",
+    "difficulty": "hard"
+  }
 ]

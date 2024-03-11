@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-
+import { useState} from "react";
+import '../App.css'
 export default function GuessForm({
   answer,
   clicked,
@@ -8,9 +8,10 @@ export default function GuessForm({
   longStreak,
   setLongStreak,
   isCorrect,
-  setIsCorrect,
+  setIsCorrect
 }) {
   const [guess, setGuess] = useState("");
+  
   // check the guess
   const checkGuess = (e) => {
     e.preventDefault();
@@ -35,9 +36,8 @@ export default function GuessForm({
     <>
       <div className="input-form">
         <h4>Guess the answer here</h4>
-        <h5>{answer}</h5>
         <form onSubmit={checkGuess}>
-          <input type="text" value={guess} onChange={handleInputChange} />
+          <input type="text" className={isCorrect == "true" ? "correct" : isCorrect == "false" ? "incorrect" : null}value={guess} onChange={handleInputChange} />
           <input type="submit" value="Submit" />
         </form>
       </div>
