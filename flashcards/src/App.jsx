@@ -36,6 +36,17 @@ function App() {
     setQA(0); // Reset to question side
   };
 
+  const shuffleCards = () =>{
+    // shuffle every card in the flashcards array except for the very first one (this stays at the start card)
+    // set the current index to be at index 1
+
+    for (let i = flashcards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))+1;
+      [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+    }
+    setCurrentIndex(1);
+  }
+
   return (
     <>
       <Container fluid className="background-container">
@@ -106,6 +117,7 @@ function App() {
             >
               <i className="bi bi-arrow-right"></i>
             </Button>
+            <Button className="shuffleBtn" variant="outline -dark" onClick={shuffleCards}>Shuffle Cards</Button>
           </Col>
         </Row>
       </Container>
