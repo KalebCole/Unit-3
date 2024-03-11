@@ -1,4 +1,4 @@
-// I have an issue where I am Trying. To validate the form Based on if it's clicked or not, but The click state is in the card component.
+
 
 import { useState } from "react";
 import "./App.css";
@@ -12,11 +12,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // question or answer of card (determines if clicked or not)
   const [QA, setQA] = useState(0);
+  // used for previous card
   const [previousIndex, setPreviousIndex] = useState(null);
   const [showStartCard, setShowStartCard] = useState(true);
-  // create a current streak state
-  // create a longest streak state
+  const [currStreak, setCurrStreak] = useState(0);
+  const [longestStreak, setLongestStreak] = useState(0);
+  // this will update the input field background
+  const[isCorrect, setIsCorrect] = useState('')
 
   const goBackValidation = () => {
     if (previousIndex !== null) {
@@ -76,9 +80,16 @@ function App() {
         <Row>
           <Col></Col>
           <Col>
-            {/* pass current and longest streak into here */}
-            {/* pass clicked into here */}
-            <GuessForm answer={flashcards.answer}></GuessForm>
+            <GuessForm
+              answer={showStartCard ? start.answer : flashcards[currentIndex].answer}
+              clicked={QA}
+              currStreak={currStreak}
+              setCurrStreak={setCurrStreak}
+              longStreak={longestStreak}
+              setLongStreak={setLongestStreak}
+              isCorrect={isCorrect}
+              setIsCorrect={setIsCorrect}
+            ></GuessForm>
           </Col>
           <Col></Col>
         </Row>

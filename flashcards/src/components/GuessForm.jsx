@@ -1,37 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function GuessForm({ answer, clicked, currStreak, setCurrStreak, longStreak, setLongStreak, isCorrect, setIsCorrect }) {
-
-    const [guess, setGuess] = useState('');
-    // check the guess
-    const checkGuess = (e) => {
-        e.preventDefault();
-        if(clicked || guess !== answer){
-            setIsCorrect("False");
-            if(currStreak > longStreak){
-                setLongStreak(currStreak)
-            }
-        }
-        else{
-            setIsCorrect("True");
-            setCurrStreak(currStreak + 1);
-        }
-        console.log(isCorrect)
+export default function GuessForm({
+  answer,
+  clicked,
+  currStreak,
+  setCurrStreak,
+  longStreak,
+  setLongStreak,
+  isCorrect,
+  setIsCorrect,
+}) {
+  const [guess, setGuess] = useState("");
+  // check the guess
+  const checkGuess = (e) => {
+    e.preventDefault();
+    if (clicked || guess !== answer) {
+      setIsCorrect("false");
+      if (currStreak > longStreak) {
+        setLongStreak(currStreak);
+      }
+      setCurrStreak(0);
+    } else {
+      setIsCorrect("true");
+      setCurrStreak(currStreak + 1);
     }
-    const handleInputChange = (event) => {
-        setGuess(event.target.value);
-    }
+    setGuess('')
+  };
+  
+  const handleInputChange = (event) => {
+    setGuess(event.target.value);
+  };
 
-    return(
-        <>
-        <div className="input-form">
-            <h4>Guess the answer here</h4>
-            <form onSubmit={checkGuess}>
-                <input type="text" value={guess} onChange={handleInputChange}/>
-            </form>
-            <input type="submit" value="Submit" />
-        </div>
-        </>
-    );
-
-};
+  return (
+    <>
+      <div className="input-form">
+        <h4>Guess the answer here</h4>
+        <h5>{answer}</h5>
+        <form onSubmit={checkGuess}>
+          <input type="text" value={guess} onChange={handleInputChange} />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </>
+  );
+}
