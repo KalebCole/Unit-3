@@ -1,12 +1,13 @@
+// I have an issue where I am Trying. To validate the form Based on if it's clicked or not, but The click state is in the card component.
+
 import { useState } from "react";
 import "./App.css";
 import Card from "./components/Card";
+import GuessForm from "./components/GuessForm";
 import flashcards from "./assets/flashcards.json";
 import start from "./assets/start.json";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Button, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -14,6 +15,8 @@ function App() {
   const [QA, setQA] = useState(0);
   const [previousIndex, setPreviousIndex] = useState(null);
   const [showStartCard, setShowStartCard] = useState(true);
+  // create a current streak state
+  // create a longest streak state
 
   const goBackValidation = () => {
     if (previousIndex !== null) {
@@ -22,6 +25,7 @@ function App() {
     }
   };
 
+  // on click of this, set the input field to be an empty string
   const goForwardValidation = () => {
     let randomIndex;
     do {
@@ -37,7 +41,7 @@ function App() {
   };
   return (
     <>
-      <Container fluid className="background-container"> 
+      <Container fluid className="background-container">
         <Row className="App-header mt-5 mb-4">
           <h1>ISYS366: E-Commerce Midterm Study Guide</h1>
         </Row>
@@ -65,6 +69,16 @@ function App() {
                 setQA={setQA}
               />
             )}
+          </Col>
+          <Col></Col>
+        </Row>
+
+        <Row>
+          <Col></Col>
+          <Col>
+            {/* pass current and longest streak into here */}
+            {/* pass clicked into here */}
+            <GuessForm answer={flashcards.answer}></GuessForm>
           </Col>
           <Col></Col>
         </Row>

@@ -14,11 +14,9 @@ export default function Card({ question, answer, difficulty, QA, setQA }) {
       <div className="flip-card-inner">
         <div className={cardFrontAndBack}>
           {QA === 0 ? <h2>{question}</h2> : null}
-          {console.log("front "+QA)}
         </div>
         <div className={cardFrontAndBack}>
           {QA === 1 ? <h2>{answer}</h2> : null}
-          {console.log("back "+QA)}
         </div>
       </div>
     </div>

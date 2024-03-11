@@ -25,6 +25,8 @@
   width: 600px;
   height: 250px;
   perspective: 1000px;
+  background-color: white;
+  color: black;
 }
 
 /* This container is needed to position the front and back side */
@@ -50,14 +52,14 @@
   backface-visibility: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  
+  
   
 }
 
 .flip-card.clicked .flip-card-back {
   transform: rotateX(180deg);
 }
-/* End of Flip Card Section */
 .easy{
   background-color: rgb(145, 226, 145);
   color: black;
@@ -71,3 +73,12 @@
   background-color: rgb(253, 101, 101);
   color: black;
 }
+/* End of Flip Card Section */
+
+/* Guess Form Section */
+.input-form{
+  display: flex;
+}
+
+
+/* End of Guess Form Section */
