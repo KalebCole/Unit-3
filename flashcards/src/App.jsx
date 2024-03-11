@@ -13,13 +13,15 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   // question or answer of card (determines if clicked or not)
   const [QA, setQA] = useState(0);
-  // used for previous card
-  const [previousIndex, setPreviousIndex] = useState(null);
-
   const [currStreak, setCurrStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
   // this will update the input field background
   const[isCorrect, setIsCorrect] = useState('')
+  const [guess, setGuess] = useState("");
+  // const [guessState, setGuessState] = useState({
+  //   isCorrect: '',
+  //   guess: ''
+  // });
   
 
   const goBackValidation = () => {
@@ -37,9 +39,6 @@ function App() {
   };
 
   const shuffleCards = () =>{
-    // shuffle every card in the flashcards array except for the very first one (this stays at the start card)
-    // set the current index to be at index 1
-
     for (let i = flashcards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))+1;
       [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
@@ -55,7 +54,7 @@ function App() {
         </Row>
         <Row>
           <h4>How much do you know about ASP.NET and Web Development??</h4>
-          <h5>Number of Cards: {flashcards.length}</h5>
+          <h5>Number of Cards: {flashcards.length-1}</h5>
         </Row>
         <Row>
           <Col></Col>
@@ -93,6 +92,8 @@ function App() {
               setLongStreak={setLongestStreak}
               isCorrect={isCorrect}
               setIsCorrect={setIsCorrect}
+              guess={guess}
+              setGuess={setGuess}
             ></GuessForm>
           </Col>
           <Col></Col>
@@ -113,11 +114,12 @@ function App() {
               onClick={() => {
                 goForwardValidation();
                 setIsCorrect("");
+                setGuess("");
               }}
             >
               <i className="bi bi-arrow-right"></i>
             </Button>
-            <Button className="shuffleBtn" variant="outline -dark" onClick={shuffleCards}>Shuffle Cards</Button>
+            <Button className="shuffleBtn" variant="outline-dark" onClick={shuffleCards}>Shuffle Cards</Button>
           </Col>
         </Row>
       </Container>
