@@ -10,22 +10,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   // question or answer of card (determines if clicked or not)
-  const [QA, setQA] = useState(0);
+  const [QA, setQA] = useState("question");
+  const [isClicked, setIsClicked] = useState(false);
   const [currStreak, setCurrStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
   // this will update the input field background
   const [isCorrect, setIsCorrect] = useState("");
   const [guess, setGuess] = useState("");
-  // const [flashcards, setFlashcards] = useState([...flashcards]);
-  // const [masteredCards, setMasteredCards] = useState([]);
 
-  // const handleCorrectGuess = (card) => {
-  //   // Add the card to the masteredCards array
-  //   setMasteredCards([...masteredCards, card]);
+  
+  const updateOnCardClick = () => {
+    setQA((prevQA) => (prevQA === "question" ? "answer" : "question"));
+    setIsClicked(true);
+  };
 
-  //   // Remove the card from the flashcards array
-  //   setFlashcards(flashcards.filter((flashcard) => flashcard !== card));
-  // };
   const goBackValidation = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
@@ -37,7 +35,8 @@ function App() {
     if (currentIndex < flashcards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
-    setQA(0); // Reset to question side
+    setQA("question"); // Reset to question side
+    setIsClicked(false); // Reset to not clicked
   };
 
   const shuffleCards = () => {
@@ -76,7 +75,7 @@ function App() {
                 answer={flashcards[currentIndex].answer}
                 difficulty={flashcards[currentIndex].difficulty}
                 QA={QA}
-                setQA={setQA}
+                updateOnCardClick={updateOnCardClick}
               />
             }
           </Col>
@@ -88,7 +87,7 @@ function App() {
           <Col>
             <GuessForm
               answer={flashcards[currentIndex].answer}
-              clicked={QA}
+              isClicked={isClicked}
               currStreak={currStreak}
               setCurrStreak={setCurrStreak}
               longStreak={longestStreak}

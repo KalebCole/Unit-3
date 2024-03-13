@@ -4,9 +4,7 @@ Submitted by: **Kaleb Cole**
 
 This web app: **ISYS366 study guide for my midterm exam on 03/08/2024**
 
-Time spent: **4.5** hours spent in total
-
-## Required Features
+Time spent: **5** hours spent in total
 
 ## Required Features
 
@@ -39,6 +37,7 @@ GIF created with LICEcap
 ## Notes
 
 * I had to lift the state a couple of times in order to update things in the Form component using the forward and backward buttons in my app component
+* I wasn't sure how to implement creating a state object and having multiple attributes given the states that I have. If I could have some feedback on that, I would greatly appreciate it! :)
 
 
 ## License

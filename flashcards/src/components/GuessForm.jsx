@@ -2,7 +2,7 @@ import FuzzySet from "fuzzyset.js";
 import "../App.css";
 export default function GuessForm({
   answer,
-  clicked,
+  isClicked,
   currStreak,
   setCurrStreak,
   longStreak,
@@ -16,10 +16,21 @@ export default function GuessForm({
   const checkGuess = (e) => {
     e.preventDefault();
 
-    const fuzzySet = FuzzySet([answer.toLowerCase()]);
-    const result = fuzzySet.get(guess.toLowerCase());
+    const answerPhrases = answer.toLowerCase().split(", ");
+    const guessPhrases = guess.toLowerCase().split(", ");
 
-    if (clicked || !result || result[0][0] < 0.8) {
+    let matchCount = 0;
+    for (let guessPhrase of guessPhrases) {
+      const fuzzySet = FuzzySet(answerPhrases);
+      const result = fuzzySet.get(guessPhrase);
+      if (result && result[0][0] >= 0.8) {
+        matchCount++;
+      }
+    }
+    if (isClicked) {
+      return;
+    }
+    if (matchCount / answerPhrases.length < 0.8) {
       // 0.8 is the threshold for a match
       setIsCorrect("false");
       if (currStreak > longStreak) {
