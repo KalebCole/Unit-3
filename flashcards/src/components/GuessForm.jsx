@@ -1,4 +1,4 @@
-import { useState } from "react";
+import FuzzySet from "fuzzyset.js";
 import "../App.css";
 export default function GuessForm({
   answer,
@@ -15,7 +15,12 @@ export default function GuessForm({
   // check the guess
   const checkGuess = (e) => {
     e.preventDefault();
-    if (clicked || guess !== answer) {
+
+    const fuzzySet = FuzzySet([answer.toLowerCase()]);
+    const result = fuzzySet.get(guess.toLowerCase());
+
+    if (clicked || !result || result[0][0] < 0.8) {
+      // 0.8 is the threshold for a match
       setIsCorrect("false");
       if (currStreak > longStreak) {
         setLongStreak(currStreak);

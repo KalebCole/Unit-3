@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import "./App.css";
 import Card from "./components/Card";
@@ -16,35 +14,39 @@ function App() {
   const [currStreak, setCurrStreak] = useState(0);
   const [longestStreak, setLongestStreak] = useState(0);
   // this will update the input field background
-  const[isCorrect, setIsCorrect] = useState('')
+  const [isCorrect, setIsCorrect] = useState("");
   const [guess, setGuess] = useState("");
-  // const [guessState, setGuessState] = useState({
-  //   isCorrect: '',
-  //   guess: ''
-  // });
-  
+  // const [flashcards, setFlashcards] = useState([...flashcards]);
+  // const [masteredCards, setMasteredCards] = useState([]);
 
+  // const handleCorrectGuess = (card) => {
+  //   // Add the card to the masteredCards array
+  //   setMasteredCards([...masteredCards, card]);
+
+  //   // Remove the card from the flashcards array
+  //   setFlashcards(flashcards.filter((flashcard) => flashcard !== card));
+  // };
   const goBackValidation = () => {
-    if(currentIndex > 0){
-      setCurrentIndex(currentIndex-1)
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
   // on click of this, set the input field to be an empty string
   const goForwardValidation = () => {
-    if(currentIndex < flashcards.length-1){
+    if (currentIndex < flashcards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
     setQA(0); // Reset to question side
   };
 
-  const shuffleCards = () =>{
+  const shuffleCards = () => {
     for (let i = flashcards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))+1;
+      const j = Math.floor(Math.random() * (i + 1)) + 1;
       [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
     }
     setCurrentIndex(1);
-  }
+  };
 
   return (
     <>
@@ -54,13 +56,13 @@ function App() {
         </Row>
         <Row>
           <h4>How much do you know about ASP.NET and Web Development??</h4>
-          <h5>Number of Cards: {flashcards.length-1}</h5>
+          <h5>Number of Cards: {flashcards.length - 1}</h5>
         </Row>
         <Row>
           <Col></Col>
           <Col>
-          <h5>Current Streak: {currStreak}</h5>
-          <h5>Longest Streak: {longestStreak}</h5>
+            <h5>Current Streak: {currStreak}</h5>
+            <h5>Longest Streak: {longestStreak}</h5>
           </Col>
           <Col></Col>
         </Row>
@@ -68,7 +70,8 @@ function App() {
         <Row className="mt-4 mb-4">
           <Col></Col>
           <Col>
-            {<Card
+            {
+              <Card
                 question={flashcards[currentIndex].question}
                 answer={flashcards[currentIndex].answer}
                 difficulty={flashcards[currentIndex].difficulty}
@@ -119,7 +122,13 @@ function App() {
             >
               <i className="bi bi-arrow-right"></i>
             </Button>
-            <Button className="shuffleBtn" variant="outline-dark" onClick={shuffleCards}>Shuffle Cards</Button>
+            <Button
+              className="shuffleBtn"
+              variant="outline-dark"
+              onClick={shuffleCards}
+            >
+              Shuffle Cards
+            </Button>
           </Col>
         </Row>
       </Container>
