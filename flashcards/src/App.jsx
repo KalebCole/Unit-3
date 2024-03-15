@@ -8,68 +8,71 @@ import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [cards, setCards] = useState(flashcards);
-  // const [guess, setGuess] = {
-  //   guess: "",
-  //   currStreak: 0,
-  //   longestStreak: 0,
-  //   isCorrect: "",
-  //   answer: "",
-  //   isClicked: false
-  // }
-  // question or answer of card (determines if clicked or not)
-  const [QA, setQA] = useState("question");
-  const [isClicked, setIsClicked] = useState(false);
-  const [currStreak, setCurrStreak] = useState(0);
-  const [longestStreak, setLongestStreak] = useState(0);
-  // this will update the input field background
-  const [isCorrect, setIsCorrect] = useState("");
-  const [guess, setGuess] = useState("");
-
-
-  useEffect(() => {
-    // Fetch flashcards data here and set it in state
-    setCards(flashcards);
-  }, []);
+  const [cardsState, setCardsState] = useState({
+    currentIndex: 0,
+    QA: "question", 
+    cards: flashcards, 
+    difficulty: "",
+    isClicked: false,
+  });
+  const [guessState, setGuessState] = useState({
+    guess: "",
+    currStreak: 0,
+    longestStreak: 0,
+    isCorrect: "",
+  });
 
   const updateOnCardClick = () => {
-    setQA((prevQA) => (prevQA === "question" ? "answer" : "question"));
-    setIsClicked(true);
+    setCardsState((prev) => ({
+      ...prev,
+      QA: prev.QA === "question" ? "answer" : "question",
+      isClicked: true,
+    }));
   };
 
   const goBackValidation = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
+    setCardsState((prev) => ({
+      ...prev,
+      currentIndex: prev.currentIndex > 0 ? prev.currentIndex - 1 : prev.currentIndex,
+    }));
   };
 
-  // on click of this, set the input field to be an empty string
   const goForwardValidation = () => {
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    }
-    setQA("question"); // Reset to question side
-    setIsClicked(false); // Reset to not clicked
+    setCardsState((prev) => ({
+      ...prev,
+      currentIndex: prev.currentIndex < prev.cards.length - 1 ? prev.currentIndex + 1 : prev.currentIndex,
+      QA: "question",
+      isClicked: false,
+    }));
   };
+
 
   const onClickMovingForward = () => {
     goForwardValidation();
-    setIsCorrect("");
-    setGuess("");
+    setGuessState((prev) => ({
+      ...prev,
+      guess: "",
+      isCorrect: "",
+    }));
   };
 
   const shuffleCards = () => {
-    setQA("question");
-    setIsClicked(false);
-    setGuess("");
-    let newCards = [...cards];
-    for (let i = newCards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * i) + 1;
-      [newCards[i], newCards[j]] = [newCards[j], newCards[i]];
-    }
-    setCards(newCards);
-    setCurrentIndex(1);
+    setCardsState((prev) => {
+      let newCards = [...prev.cards];
+      for (let i = newCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * i) + 1;
+        [newCards[i], newCards[j]] = [newCards[j], newCards[i]];
+      }
+      // we are returning a new object with the same properties as the previous state
+      // we do this because there is not a setState method for this object
+      return {
+        ...prev,
+        cards: newCards,
+        currentIndex: 1,  // Reset currentIndex to 1 becuase 0 is the title card
+        QA: "question",
+        isClicked: false,
+      };
+    });
   };
 
   return (
@@ -80,13 +83,13 @@ function App() {
         </Row>
         <Row>
           <h4>How much do you know about ASP.NET and Web Development??</h4>
-          <h5>Number of Cards: {cards.length - 1}</h5>
+          <h5>Number of Cards: {cardsState.cards.length - 1}</h5>
         </Row>
         <Row>
           <Col></Col>
           <Col>
-            <h5>Current Streak: {currStreak}</h5>
-            <h5>Longest Streak: {longestStreak}</h5>
+            <h5>Current Streak: {guessState.currStreak}</h5>
+            <h5>Longest Streak: {guessState.longestStreak}</h5>
           </Col>
           <Col></Col>
         </Row>
@@ -96,10 +99,10 @@ function App() {
           <Col>
             {
               <Card
-                question={cards[currentIndex].question}
-                answer={cards[currentIndex].answer}
-                difficulty={cards[currentIndex].difficulty}
-                QA={QA}
+                question={cardsState.cards[cardsState.currentIndex].question}
+                answer={cardsState.cards[cardsState.currentIndex].answer}
+                difficulty={cardsState.cards[cardsState.currentIndex].difficulty}
+                QA={cardsState.QA}
                 updateOnCardClick={updateOnCardClick}
               />
             }
@@ -111,16 +114,16 @@ function App() {
           <Col></Col>
           <Col>
             <GuessForm
-              answer={cards[currentIndex].answer}
-              isClicked={isClicked}
-              currStreak={currStreak}
-              setCurrStreak={setCurrStreak}
-              longStreak={longestStreak}
-              setLongStreak={setLongestStreak}
-              isCorrect={isCorrect}
-              setIsCorrect={setIsCorrect}
-              guess={guess}
-              setGuess={setGuess}
+              answer={cardsState.cards[cardsState.currentIndex].answer}
+              isClicked={cardsState.isClicked}
+              currStreak={guessState.currStreak}
+              setCurrStreak={(newStreak) => setGuessState((prev) => ({ ...prev, currStreak: newStreak }))}
+              longStreak={guessState.longestStreak}
+              setLongStreak={(newStreak) => setGuessState((prev) => ({ ...prev, longestStreak: newStreak }))}
+              isCorrect={guessState.isCorrect}
+              setIsCorrect={(isCorrect) => setGuessState((prev) => ({ ...prev, isCorrect }))}
+              guess={guessState.guess}
+              setGuess={(guess) => setGuessState((prev) => ({ ...prev, guess }))}
             ></GuessForm>
           </Col>
           <Col></Col>
