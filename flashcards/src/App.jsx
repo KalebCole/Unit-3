@@ -30,31 +30,58 @@ function App() {
     }));
   };
 
-  const goBackValidation = () => {
-    setCardsState((prev) => ({
-      ...prev,
-      currentIndex: prev.currentIndex > 0 ? prev.currentIndex - 1 : prev.currentIndex,
-    }));
+  
+  const onClickMovingBack = () => {
+    setCardsState((prevCardsState) => {
+      if (prevCardsState.currentIndex > 1) {
+        return {
+          ...prevCardsState,
+          currentIndex: prevCardsState.currentIndex - 1,
+          QA: "question",
+          isClicked: false,
+        };
+      }
+      return prevCardsState;
+    });
+    setGuessState((prevGuessState) => {
+      if(prevGuessState.currentIndex > 0){
+        return {
+          ...prevGuessState,
+          currentIndex: prevGuessState.currentIndex - 1,
+          QA: "question",
+          isClicked: false,
+          guess: "",
+          isCorrect: "",
+        };
+      }
+      return prevGuessState;
+    });
   };
 
-  const goForwardValidation = () => {
-    setCardsState((prev) => ({
-      ...prev,
-      currentIndex: prev.currentIndex < prev.cards.length - 1 ? prev.currentIndex + 1 : prev.currentIndex,
-      QA: "question",
-      isClicked: false,
-    }));
-  };
 
 
   const onClickMovingForward = () => {
-    goForwardValidation();
-    setGuessState((prev) => ({
-      ...prev,
-      guess: "",
-      isCorrect: "",
+    setCardsState((prevCardsState) => {
+        if (prevCardsState.currentIndex < prevCardsState.cards.length - 1) {
+            return {
+                ...prevCardsState,
+                currentIndex: prevCardsState.currentIndex + 1,
+                QA: "question",
+                isClicked: false,
+            };
+        }
+        return prevCardsState;
+    });
+
+    setGuessState((prevGuessState) => ({
+        ...prevGuessState,
+        currentIndex: prevGuessState.currentIndex + 1,
+        QA: "question",
+        isClicked: false,
+        guess: "",
+        isCorrect: "",
     }));
-  };
+};
 
   const shuffleCards = () => {
     setCardsState((prev) => {
@@ -71,8 +98,18 @@ function App() {
         currentIndex: 1,  // Reset currentIndex to 1 becuase 0 is the title card
         QA: "question",
         isClicked: false,
+        isCorrect: "",
       };
     });
+    setGuessState((prevGuessState) => ({
+        ...prevGuessState,
+        currentIndex: prevGuessState.currentIndex + 1,
+        QA: "question",
+        isClicked: false,
+        guess: "",
+        isCorrect: "",
+    }));
+
   };
 
   return (
@@ -134,7 +171,7 @@ function App() {
             <Button
               className="backBtn"
               variant="outline-dark"
-              onClick={goBackValidation}
+              onClick={onClickMovingBack}
             >
               <i className="bi bi-arrow-left"></i>
             </Button>
