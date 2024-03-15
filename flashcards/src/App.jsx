@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Card from "./components/Card";
 import GuessForm from "./components/GuessForm";
@@ -9,6 +9,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cards, setCards] = useState(flashcards);
+  // const [guess, setGuess] = {
+  //   guess: "",
+  //   currStreak: 0,
+  //   longestStreak: 0,
+  //   isCorrect: "",
+  //   answer: "",
+  //   isClicked: false
+  // }
   // question or answer of card (determines if clicked or not)
   const [QA, setQA] = useState("question");
   const [isClicked, setIsClicked] = useState(false);
@@ -18,7 +27,12 @@ function App() {
   const [isCorrect, setIsCorrect] = useState("");
   const [guess, setGuess] = useState("");
 
-  
+
+  useEffect(() => {
+    // Fetch flashcards data here and set it in state
+    setCards(flashcards);
+  }, []);
+
   const updateOnCardClick = () => {
     setQA((prevQA) => (prevQA === "question" ? "answer" : "question"));
     setIsClicked(true);
@@ -32,18 +46,29 @@ function App() {
 
   // on click of this, set the input field to be an empty string
   const goForwardValidation = () => {
-    if (currentIndex < flashcards.length - 1) {
+    if (currentIndex < cards.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
     setQA("question"); // Reset to question side
     setIsClicked(false); // Reset to not clicked
   };
 
+  const onClickMovingForward = () => {
+    goForwardValidation();
+    setIsCorrect("");
+    setGuess("");
+  };
+
   const shuffleCards = () => {
-    for (let i = flashcards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)) + 1;
-      [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+    setQA("question");
+    setIsClicked(false);
+    setGuess("");
+    let newCards = [...cards];
+    for (let i = newCards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i) + 1;
+      [newCards[i], newCards[j]] = [newCards[j], newCards[i]];
     }
+    setCards(newCards);
     setCurrentIndex(1);
   };
 
@@ -55,7 +80,7 @@ function App() {
         </Row>
         <Row>
           <h4>How much do you know about ASP.NET and Web Development??</h4>
-          <h5>Number of Cards: {flashcards.length - 1}</h5>
+          <h5>Number of Cards: {cards.length - 1}</h5>
         </Row>
         <Row>
           <Col></Col>
@@ -71,9 +96,9 @@ function App() {
           <Col>
             {
               <Card
-                question={flashcards[currentIndex].question}
-                answer={flashcards[currentIndex].answer}
-                difficulty={flashcards[currentIndex].difficulty}
+                question={cards[currentIndex].question}
+                answer={cards[currentIndex].answer}
+                difficulty={cards[currentIndex].difficulty}
                 QA={QA}
                 updateOnCardClick={updateOnCardClick}
               />
@@ -86,7 +111,7 @@ function App() {
           <Col></Col>
           <Col>
             <GuessForm
-              answer={flashcards[currentIndex].answer}
+              answer={cards[currentIndex].answer}
               isClicked={isClicked}
               currStreak={currStreak}
               setCurrStreak={setCurrStreak}
@@ -113,11 +138,7 @@ function App() {
             <Button
               className="forwardBtn"
               variant="outline-dark"
-              onClick={() => {
-                goForwardValidation();
-                setIsCorrect("");
-                setGuess("");
-              }}
+              onClick={onClickMovingForward}
             >
               <i className="bi bi-arrow-right"></i>
             </Button>
